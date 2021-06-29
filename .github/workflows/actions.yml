@@ -1,0 +1,20 @@
+name: LargeRepo
+
+on:
+  pull_request:
+
+jobs:
+  pr:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '14'
+      - run: npm install
+      - run: npx nx affected --base=origin/main --target=build --parallel --max-parallel=3
+      - run: npx nx affected --base=origin/main --target=test --parallel --max-parallel=3
+      - run: npx nx affected --base=origin/main --target=lint --parallel --max-parallel=3
+      - run: npx nx affected --base=origin/main --target=e2e
