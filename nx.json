@@ -3,18 +3,25 @@
   "affected": {
     "defaultBase": "master"
   },
+  "plugins": [
+    "./tools/project-graph-plugin"
+  ],
   "implicitDependencies": {
     "package.json": {
       "dependencies": "*",
       "devDependencies": "*"
     },
-    ".eslintrc.json": "*"
+    ".eslintrc.json": "*",
+    "tools/project-graph-plugins.js": "*"
   },
   "tasksRunnerOptions": {
     "default": {
-      "runner": "@nrwl/workspace/tasks-runners/default",
+      "runner": "@nrwl/nx-cloud",
       "options": {
-        "cacheableOperations": ["build", "lint", "test", "e2e"]
+        "cacheableOperations": ["build", "lint", "test", "e2e"],
+        "accessToken": "ZDM0OTE2NjAtODFlZS00MzcwLWE3ZDYtZWFmYTA0NTBjNDM5fHJlYWQtd3JpdGU=",
+        "canTrackAnalytics": false,
+        "showUsageWarnings": true
       }
     }
   },
@@ -27,12 +34,18 @@
     ]
   },
   "projects": {
+    "shared-utils": {
+      "tags": []
+    },
     "shop": {
       "tags": []
     },
     "shop-e2e": {
       "tags": [],
       "implicitDependencies": ["shop"]
+    },
+    "shop-feature-about": {
+      "tags": []
     }
   }
 }
